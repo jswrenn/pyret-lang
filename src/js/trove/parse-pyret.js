@@ -1034,11 +1034,12 @@ define(["js/runtime-util", "js/ffi-helpers", "trove/ast", "trove/srcloc", "js/py
           var parsed = grammar.parse(toks);
           //console.log("Result:");
           grammar.countAndPriceAllParses(parsed);
-          console.log("Count:", parsed.count, ", min cost:", parsed.minCost);
-          var countParses = grammar.countAllParses(parsed);
-          if (countParses == 0) {
+          if (parsed.count !== 1 || parsed.minCost > 0)
+            console.log("Filename: ", fileName, " Count:", parsed.count, ", min cost:", parsed.minCost);
+          // var countParses = grammar.countAllParses(parsed);
+          if (parsed.count == 0) {
             var nextTok = toks.curTok; 
-            console.error("There were " + countParses + " potential parses.\n" +
+            console.error("There were " + parsed.count + " potential parses.\n" +
                           "Parse failed, next token is " + nextTok.toString(true) +
                           " at " + nextTok.pos.toString(true));
             if (toks.isEOF(nextTok))

@@ -423,7 +423,10 @@ fun compile-fun-body(l :: Loc, step :: A.Name, fun-name :: A.Name, compiler, arg
         end +
         for CL.map_list_n(i from 0, v from vars):
           j-expr(j-assign(v, j-bracket(j-dot(j-id(first-arg), "vars"), j-num(i))))
-        end)
+        end +
+        [clist:
+          j-expr(j-dot-assign(j-id(first-arg), "vars", undefined)),
+          j-expr(j-dot-assign(j-id(first-arg), "args", undefined))])
     cases(Option) opt-arity:
       | some(arity) =>
         j-if(rt-method("isActivationRecord", [clist: j-id(first-arg)]),

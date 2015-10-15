@@ -20,6 +20,7 @@ import option as _
 import parse-pyret as _
 import pathlib as _
 import pprint as _
+import profiling as _
 import s-exp as _
 import sets as _
 import srcloc as _
