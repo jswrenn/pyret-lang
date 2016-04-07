@@ -111,14 +111,15 @@ fun main(args):
         end
       else:
         if r.has-key("build"):
-          result = CLI.compile(r.get-value("compile"),
+          result = CLI.compile(r.get-value("build"),
             {
               check-mode : check-mode,
               type-check : type-check,
               trace : trace,
               allow-shadowed : allow-shadowed,
               collect-all: false,
-              ignore-unbound: false
+              ignore-unbound: false,
+              proper-tail-calls: tail-calls
             })
           failures = filter(CS.is-err, result)
           when is-link(failures):
